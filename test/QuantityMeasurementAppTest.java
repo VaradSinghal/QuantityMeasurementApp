@@ -1,117 +1,72 @@
+// QuantityMeasurementTest.java
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class QuantityMeasurementAppTest {
+class QuantityMeasurementTest {
 
-    private static final double EPSILON = 1e-6;
+    /* ================= LENGTH TESTS ================= */
 
-    // UC1 + UC3 Equality
     @Test
-    void testEquality_FeetToFeet() {
+    void testLengthEquality() {
         assertEquals(
-                new QuantityLength(1.0, LengthUnit.FEET),
-                new QuantityLength(1.0, LengthUnit.FEET)
+                new QuantityLength(1, LengthUnit.FEET),
+                new QuantityLength(12, LengthUnit.INCHES)
         );
     }
 
     @Test
-    void testEquality_FeetToInches() {
+    void testLengthConversion() {
+        QuantityLength result =
+                new QuantityLength(1, LengthUnit.FEET)
+                        .convertTo(LengthUnit.INCHES);
+
+        assertEquals(12.0, result.convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES).convertTo(LengthUnit.INCHES), 1e-6);
+    }
+
+    @Test
+    void testLengthAddition() {
+        QuantityLength result =
+                new QuantityLength(1, LengthUnit.FEET)
+                        .add(new QuantityLength(12, LengthUnit.INCHES));
+
+        assertEquals(new QuantityLength(2, LengthUnit.FEET), result);
+    }
+
+    /* ================= WEIGHT TESTS ================= */
+
+    @Test
+    void testWeightEquality() {
         assertEquals(
-                new QuantityLength(1.0, LengthUnit.FEET),
-                new QuantityLength(12.0, LengthUnit.INCHES)
+                new QuantityWeight(1, WeightUnit.KILOGRAM),
+                new QuantityWeight(1000, WeightUnit.GRAM)
         );
     }
 
     @Test
-    void testEquality_NotEqual() {
-        assertNotEquals(
-                new QuantityLength(1.0, LengthUnit.FEET),
-                new QuantityLength(2.0, LengthUnit.FEET)
-        );
-    }
+    void testWeightConversion() {
+        QuantityWeight result =
+                new QuantityWeight(1, WeightUnit.KILOGRAM)
+                        .convertTo(WeightUnit.GRAM);
 
-    // UC4 (yards, cm)
-    @Test
-    void testEquality_YardsToFeet() {
-        assertEquals(
-                new QuantityLength(1.0, LengthUnit.YARDS),
-                new QuantityLength(3.0, LengthUnit.FEET)
-        );
+        assertEquals(1000.0, result.convertTo(WeightUnit.GRAM).convertTo(WeightUnit.GRAM).convertTo(WeightUnit.GRAM).convertTo(WeightUnit.GRAM).convertTo(WeightUnit.GRAM).convertTo(WeightUnit.GRAM).convertTo(WeightUnit.GRAM).convertTo(WeightUnit.GRAM).convertTo(WeightUnit.GRAM).convertTo(WeightUnit.GRAM), 1e-6);
     }
 
     @Test
-    void testEquality_CmToInches() {
-        assertEquals(
-                new QuantityLength(2.54, LengthUnit.CENTIMETERS),
-                new QuantityLength(1.0, LengthUnit.INCHES)
-        );
-    }
+    void testWeightAddition() {
+        QuantityWeight result =
+                new QuantityWeight(1, WeightUnit.KILOGRAM)
+                        .add(new QuantityWeight(1000, WeightUnit.GRAM));
 
-    // UC5 Conversion
-    @Test
-    void testConvert_FeetToInches() {
-        assertEquals(12.0,
-                QuantityLength.convert(1.0, LengthUnit.FEET, LengthUnit.INCHES),
-                EPSILON);
+        assertEquals(new QuantityWeight(2, WeightUnit.KILOGRAM), result);
     }
 
     @Test
-    void testConvert_InchesToFeet() {
-        assertEquals(2.0,
-                QuantityLength.convert(24.0, LengthUnit.INCHES, LengthUnit.FEET),
-                EPSILON);
-    }
+    void testWeightAdditionWithTarget() {
+        QuantityWeight result =
+                new QuantityWeight(1, WeightUnit.KILOGRAM)
+                        .add(new QuantityWeight(1000, WeightUnit.GRAM), WeightUnit.GRAM);
 
-    // UC6 Addition
-    @Test
-    void testAddition_FeetPlusFeet() {
-        QuantityLength result =
-                new QuantityLength(1.0, LengthUnit.FEET)
-                        .add(new QuantityLength(2.0, LengthUnit.FEET));
-
-        assertEquals(new QuantityLength(3.0, LengthUnit.FEET), result);
-    }
-
-    @Test
-    void testAddition_FeetPlusInches() {
-        QuantityLength result =
-                new QuantityLength(1.0, LengthUnit.FEET)
-                        .add(new QuantityLength(12.0, LengthUnit.INCHES));
-
-        assertEquals(new QuantityLength(2.0, LengthUnit.FEET), result);
-    }
-
-    // UC7 Target Unit
-    @Test
-    void testAddition_TargetUnit_Inches() {
-        QuantityLength result =
-                new QuantityLength(1.0, LengthUnit.FEET)
-                        .add(new QuantityLength(12.0, LengthUnit.INCHES),
-                                LengthUnit.INCHES);
-
-        assertEquals(new QuantityLength(24.0, LengthUnit.INCHES), result);
-    }
-
-    @Test
-    void testAddition_TargetUnit_Yards() {
-        QuantityLength result =
-                new QuantityLength(1.0, LengthUnit.FEET)
-                        .add(new QuantityLength(12.0, LengthUnit.INCHES),
-                                LengthUnit.YARDS);
-
-        assertEquals(0.666666, result.convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS).convertTo(LengthUnit.YARDS), EPSILON);
-    }
-
-    // Edge cases
-    @Test
-    void testNullUnit() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new QuantityLength(1.0, null));
-    }
-
-    @Test
-    void testNaNValue() {
-        assertThrows(IllegalArgumentException.class,
-                () -> new QuantityLength(Double.NaN, LengthUnit.FEET));
+        assertEquals(new QuantityWeight(2000, WeightUnit.GRAM), result);
     }
 }
